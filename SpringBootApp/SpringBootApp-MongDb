@@ -14,6 +14,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: app
+  namespace: default
 spec:
   replicas: 2
   selector:
@@ -41,6 +42,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
+namespace: default
   name: springapp
 spec:
   type: LoadBalancer
@@ -55,7 +57,8 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: mongodbpvc 
+  name: mongodbpvc
+  namespace: default
 spec:
   accessModes:
     - ReadWriteOnce
@@ -67,6 +70,7 @@ apiVersion: apps/v1
 kind: ReplicaSet
 metadata:
   name: db
+  namespace: default
 spec:
   selector:
     matchLabels:
@@ -99,6 +103,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: mongo
+  namespace: default
 spec:
   type: ClusterIP
   selector:
